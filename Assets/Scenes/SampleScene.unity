@@ -14,19 +14,19 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 10
-  m_Fog: 0
-  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_Fog: 1
+  m_FogColor: {r: 0.27450982, g: 0.27450982, b: 0.27450982, a: 1}
   m_FogMode: 3
-  m_FogDensity: 0.01
+  m_FogDensity: 0.1
   m_LinearFogStart: 0
-  m_LinearFogEnd: 300
+  m_LinearFogEnd: 20
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 1
+  m_AmbientIntensity: 0.95
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: c494c335823f54b52b2e87e1b7a63a23, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -315,7 +315,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: MoveSpeed
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: SprintSpeed
@@ -324,6 +324,18 @@ PrefabInstance:
     - target: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: m_Name
       value: PlayerCapsule
+      objectReference: {fileID: 0}
+    - target: {fileID: 8997996947095583982, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8997996947095583982, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8997996947095583982, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 8997996947095583982, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: m_LocalPosition.x
@@ -384,6 +396,7 @@ GameObject:
   - component: {fileID: 1269666618}
   - component: {fileID: 1269666617}
   - component: {fileID: 1269666616}
+  - component: {fileID: 1269666619}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -410,7 +423,7 @@ TerrainCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_TerrainData: {fileID: 15600000, guid: 46fe5b7cf3dddec4e86293fbf91a0944, type: 2}
-  m_EnableTreeColliders: 0
+  m_EnableTreeColliders: 1
 --- !u!218 &1269666617
 Terrain:
   m_ObjectHideFlags: 0
@@ -466,6 +479,40 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1269666619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1269666615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10e24d2814e814240a03f1f9ee338fa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TreePlacer
+  targetTerrain: {fileID: 1269666617}
+  minDistanceBetweenTrees: 0.005
+  maxPlacementAttempts: 1500
+  treeTypes:
+  - treeName: Dead_Tree
+    treePrefab: {fileID: 4424119448787335996, guid: 49345ff8d84f60940885b62c5db9fda7, type: 3}
+    probability: 0.05
+  - treeName: Dead__Tree_02
+    treePrefab: {fileID: 1816342398111786350, guid: a6b4e7671f014bd4897e8a9c0ced7a82, type: 3}
+    probability: 0.05
+  - treeName: Tree_03
+    treePrefab: {fileID: 6508793682047096239, guid: 4d889b7c90712db4190b9a62dfb2b74b, type: 3}
+    probability: 0.2
+  - treeName: Tree_02
+    treePrefab: {fileID: 1158844204302571124, guid: 364ce41ec7f971e428249d2838420ab6, type: 3}
+    probability: 0.25
+  - treeName: Tree_01
+    treePrefab: {fileID: 7546036747758986664, guid: 474d2810029c3854cb55c67e9c953241, type: 3}
+    probability: 0.45
+  useCustomArea: 0
+  customAreaStart: {x: 0, y: 0}
+  customAreaSize: {x: 100, y: 100}
 --- !u!1 &1587997807
 GameObject:
   m_ObjectHideFlags: 0
