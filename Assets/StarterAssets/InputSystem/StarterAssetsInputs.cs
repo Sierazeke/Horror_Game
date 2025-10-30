@@ -13,15 +13,14 @@ namespace StarterAssets
 		public bool jump;
 		public bool sprint;
 
-		[Header("Movement Settings")]
-		public bool analogMovement;
+        [Header("Movement Settings")]
+        public bool analogMovement;
 
-		[Header("Mouse Cursor Settings")]
-		public bool cursorLocked = true;
-		public bool cursorInputForLook = true;
+        [Header("Mouse Cursor Settings")]
+        public bool cursorLocked = true;
+        public bool cursorInputForLook = true;
 
-#if ENABLE_INPUT_SYSTEM
-		public void OnMove(InputValue value)
+        public void OnMove(InputValue value)
 		{
 			MoveInput(value.Get<Vector2>());
 		}
@@ -43,7 +42,7 @@ namespace StarterAssets
 		{
 			SprintInput(value.isPressed);
 		}
-#endif
+
 
 
 		public void MoveInput(Vector2 newMoveDirection)
