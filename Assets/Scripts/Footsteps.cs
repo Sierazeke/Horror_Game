@@ -160,15 +160,4 @@ public class MovementSoundController : MonoBehaviour
             currentState = MovementState.Walking;
         }
     }
-
-    // For debugging
-    void OnGUI()
-    {
-        GUILayout.Label($"Movement State: {currentState}");
-        GUILayout.Label($"Audio Playing: {audioSource.isPlaying}");
-        if (audioSource.isPlaying)
-        {
-            GUILayout.Label($"Current Clip: {audioSource.clip.name}");
-        }
-    }
 }
