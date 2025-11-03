@@ -23,6 +23,8 @@ Atver mapi, kur gribi spēli klonēt un ievadi:
 ## Atver un palaid spēli:
 Uzspied Play, jeb to ▶ augšā, lai palaistu spēli
 
+------------------------
+
 
 ### Par spēli
 
