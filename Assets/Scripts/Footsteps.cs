@@ -14,8 +14,6 @@ public class MovementSoundController : MonoBehaviour
 
     [Header("Player Reference")]
     public CharacterController characterController;
-    // Alternatively, use Rigidbody:
-    // public Rigidbody playerRigidbody;
 
     private bool isMoving = false;
     private MovementState currentState = MovementState.Idle;
@@ -29,7 +27,6 @@ public class MovementSoundController : MonoBehaviour
 
     void Start()
     {
-        // If no audio source is assigned, try to get one
         if (audioSource == null)
         {
             audioSource = GetComponent<AudioSource>();
@@ -39,15 +36,13 @@ public class MovementSoundController : MonoBehaviour
             }
         }
 
-        // If no character controller is assigned, try to get one
         if (characterController == null)
         {
             characterController = GetComponent<CharacterController>();
         }
 
-        // Configure audio source
         audioSource.loop = true;
-        audioSource.spatialBlend = 1.0f; // 3D sound
+        audioSource.spatialBlend = 1.0f;
     }
 
     void Update()
@@ -60,19 +55,17 @@ public class MovementSoundController : MonoBehaviour
     {
         if (characterController != null)
         {
-            // Using CharacterController velocity
             Vector3 horizontalVelocity = new Vector3(
                 characterController.velocity.x,
                 0,
                 characterController.velocity.z
             );
-            float currentSpeed = horizontalVelocity.magnitude;
 
+            float currentSpeed = horizontalVelocity.magnitude;
             UpdateMovementState(currentSpeed);
         }
         else
         {
-            // Alternative: Using input-based detection
             float horizontal = Input.GetAxis("Horizontal");
             float vertical = Input.GetAxis("Vertical");
             bool isSprinting = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
@@ -108,7 +101,6 @@ public class MovementSoundController : MonoBehaviour
             newState = MovementState.Running;
         }
 
-        // Only update if state changed
         if (newState != currentState)
         {
             currentState = newState;
@@ -123,7 +115,7 @@ public class MovementSoundController : MonoBehaviour
                 if (!audioSource.isPlaying || audioSource.clip != walkingSound)
                 {
                     audioSource.clip = walkingSound;
-                    audioSource.pitch = Random.Range(0.9f, 1.1f); // Slight variation
+                    audioSource.pitch = Random.Range(0.9f, 1.1f);
                     audioSource.volume = 0.7f;
                     audioSource.Play();
                 }
@@ -148,7 +140,6 @@ public class MovementSoundController : MonoBehaviour
         }
     }
 
-    // Optional: Method to manually trigger sprinting
     public void SetSprinting(bool isSprinting)
     {
         if (isSprinting && currentState == MovementState.Walking)
