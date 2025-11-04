@@ -513,6 +513,79 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b34f1682f338e134ea71e5e19aef491f, type: 3}
   m_PrefabInstance: {fileID: 1001571563}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &302091887
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 146896524439396997, guid: 05bd574189420d74f8f9314d45481f09, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 94.76711
+      objectReference: {fileID: 0}
+    - target: {fileID: 146896524439396997, guid: 05bd574189420d74f8f9314d45481f09, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.4571438
+      objectReference: {fileID: 0}
+    - target: {fileID: 146896524439396997, guid: 05bd574189420d74f8f9314d45481f09, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 94.10605
+      objectReference: {fileID: 0}
+    - target: {fileID: 146896524439396997, guid: 05bd574189420d74f8f9314d45481f09, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 146896524439396997, guid: 05bd574189420d74f8f9314d45481f09, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 146896524439396997, guid: 05bd574189420d74f8f9314d45481f09, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 146896524439396997, guid: 05bd574189420d74f8f9314d45481f09, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 146896524439396997, guid: 05bd574189420d74f8f9314d45481f09, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 146896524439396997, guid: 05bd574189420d74f8f9314d45481f09, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 146896524439396997, guid: 05bd574189420d74f8f9314d45481f09, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 206287609943661324, guid: 05bd574189420d74f8f9314d45481f09, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: bab00c7eaf2ca5a40b7b02dfb292778b, type: 2}
+    - target: {fileID: 667149780509751359, guid: 05bd574189420d74f8f9314d45481f09, type: 3}
+      propertyPath: m_Name
+      value: Monstrs@Chicken Dance
+      objectReference: {fileID: 0}
+    - target: {fileID: 2283124367077485071, guid: 05bd574189420d74f8f9314d45481f09, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: bd0128d9aa2000b4ba8add283582e5e2, type: 2}
+    - target: {fileID: 6568461871570808417, guid: 05bd574189420d74f8f9314d45481f09, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 333d7a76176eb6045bc044a5f91edae6, type: 2}
+    - target: {fileID: 7734235167269594791, guid: 05bd574189420d74f8f9314d45481f09, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 5db9d5f7b99643e449d029368b1a91c0, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 05bd574189420d74f8f9314d45481f09, type: 3}
 --- !u!1001 &314897193
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4564,3 +4637,4 @@ SceneRoots:
   - {fileID: 1031817810}
   - {fileID: 1085990131}
   - {fileID: 688010840}
+  - {fileID: 302091887}
