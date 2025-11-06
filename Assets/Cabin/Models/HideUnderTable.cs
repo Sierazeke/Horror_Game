@@ -4,8 +4,10 @@ using UnityEngine.InputSystem;
 public class HideUnderTable : MonoBehaviour
 {
     public Key hideKey = Key.E;
-    public MonoBehaviour playerMovementScript;
+    public MonoBehaviour playerMovementScript; // movement only, not camera
+    public Transform cameraTransform; // assign your camera here if needed
     public float yOffset = 0.0f;
+    public bool alignHorizontalToTable = true;
 
     private bool canHide = false;
     private bool isHiding = false;
@@ -47,7 +49,12 @@ public class HideUnderTable : MonoBehaviour
         if (playerCollider != null) playerCollider.enabled = false;
 
         transform.position = currentHidePoint.position + Vector3.up * yOffset;
-        transform.rotation = currentHidePoint.rotation;
+
+        if (alignHorizontalToTable)
+        {
+            Vector3 newRot = new Vector3(cameraTransform.eulerAngles.x, currentHidePoint.eulerAngles.y, cameraTransform.eulerAngles.z);
+            cameraTransform.eulerAngles = newRot;
+        }
 
         if (playerMovementScript != null)
             playerMovementScript.enabled = false;
@@ -57,10 +64,11 @@ public class HideUnderTable : MonoBehaviour
 
     void StopHiding()
     {
+        if (controller != null) controller.enabled = false;
         transform.position = storedPosition;
         transform.rotation = storedRotation;
-
         if (controller != null) controller.enabled = true;
+
         if (playerCollider != null) playerCollider.enabled = true;
 
         if (playerMovementScript != null)
