@@ -4,8 +4,8 @@ using UnityEngine.InputSystem;
 public class HideUnderTable : MonoBehaviour
 {
     public Key hideKey = Key.E;
-    public MonoBehaviour playerMovementScript; // movement only, not camera
-    public Transform cameraTransform; // assign your camera here if needed
+    public MonoBehaviour playerMovementScript; // your current movement + camera script
+    public Transform cameraTransform;
     public float yOffset = 0.0f;
     public bool alignHorizontalToTable = true;
 
@@ -23,18 +23,20 @@ public class HideUnderTable : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         playerCollider = GetComponent<Collider>();
-        isHiding = false;
-        canHide = false;
     }
 
     void Update()
     {
         if (canHide && Keyboard.current[hideKey].wasPressedThisFrame)
         {
-            if (!isHiding)
-                StartHiding();
-            else
-                StopHiding();
+            if (!isHiding) StartHiding();
+            else StopHiding();
+        }
+
+        // Freeze player movement manually while hiding
+        if (isHiding && controller != null)
+        {
+            controller.Move(Vector3.zero); // stops player movement, camera still works
         }
     }
 
@@ -45,19 +47,17 @@ public class HideUnderTable : MonoBehaviour
         storedPosition = transform.position;
         storedRotation = transform.rotation;
 
+        // Disable collider and character controller to "lock" body
         if (controller != null) controller.enabled = false;
         if (playerCollider != null) playerCollider.enabled = false;
 
         transform.position = currentHidePoint.position + Vector3.up * yOffset;
 
-        if (alignHorizontalToTable)
+        if (alignHorizontalToTable && cameraTransform != null)
         {
             Vector3 newRot = new Vector3(cameraTransform.eulerAngles.x, currentHidePoint.eulerAngles.y, cameraTransform.eulerAngles.z);
             cameraTransform.eulerAngles = newRot;
         }
-
-        if (playerMovementScript != null)
-            playerMovementScript.enabled = false;
 
         isHiding = true;
     }
@@ -65,14 +65,12 @@ public class HideUnderTable : MonoBehaviour
     void StopHiding()
     {
         if (controller != null) controller.enabled = false;
+
         transform.position = storedPosition;
         transform.rotation = storedRotation;
+
         if (controller != null) controller.enabled = true;
-
         if (playerCollider != null) playerCollider.enabled = true;
-
-        if (playerMovementScript != null)
-            playerMovementScript.enabled = true;
 
         isHiding = false;
     }
@@ -96,6 +94,8 @@ public class HideUnderTable : MonoBehaviour
         {
             canHide = false;
             currentHidePoint = null;
+
+            if (isHiding) StopHiding();
         }
     }
 
