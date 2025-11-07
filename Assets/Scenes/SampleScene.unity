@@ -15,7 +15,7 @@ RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 10
   m_Fog: 1
-  m_FogColor: {r: 0.16078432, g: 0.21176471, b: 0.27058825, a: 1}
+  m_FogColor: {r: 0.16078432, g: 0.20784315, b: 0.26666668, a: 1}
   m_FogMode: 3
   m_FogDensity: 0.1
   m_LinearFogStart: 0
@@ -901,7 +901,7 @@ GameObject:
   - component: {fileID: 214574242}
   - component: {fileID: 214574241}
   - component: {fileID: 214574240}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Flicker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1837,7 +1837,7 @@ GameObject:
   - component: {fileID: 429894640}
   - component: {fileID: 429894639}
   - component: {fileID: 429894638}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Flicker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2393,6 +2393,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyFollow
   player: {fileID: 713212229}
   speed: 7
+  minBounds: {x: 139, y: 0, z: 63}
+  maxBounds: {x: 63, y: 5, z: 136}
+  visionRange: 3.5
+  hearingRange: 14
+  playerSounds: {fileID: 713212223}
+  lightMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!65 &558248039
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3648,7 +3656,7 @@ GameObject:
   - component: {fileID: 745223908}
   - component: {fileID: 745223907}
   - component: {fileID: 745223906}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Flicker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4087,7 +4095,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6218003211420716661, guid: 6bd2372f90c98b147b3b2fa12a853093, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6701664475705513167, guid: 6bd2372f90c98b147b3b2fa12a853093, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5321,6 +5329,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyStatue
       objectReference: {fileID: 0}
+    - target: {fileID: 6218003211420716661, guid: 6bd2372f90c98b147b3b2fa12a853093, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6701664475705513167, guid: 6bd2372f90c98b147b3b2fa12a853093, type: 3}
       propertyPath: m_LocalPosition.x
       value: 91.69878
@@ -5502,7 +5514,7 @@ GameObject:
   - component: {fileID: 1235254461}
   - component: {fileID: 1235254460}
   - component: {fileID: 1235254459}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Flicker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5990,6 +6002,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 9ab0e9c901204be4e99f9580285e2504, type: 3}
       propertyPath: m_Name
       value: flashlight
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9ab0e9c901204be4e99f9580285e2504, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6771,7 +6787,7 @@ GameObject:
   - component: {fileID: 1596902767}
   - component: {fileID: 1596902769}
   - component: {fileID: 1596902768}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Directional Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7827,7 +7843,7 @@ GameObject:
   - component: {fileID: 1942383575}
   - component: {fileID: 1942383574}
   - component: {fileID: 1942383573}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Flicker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8913,7 +8929,7 @@ GameObject:
   - component: {fileID: 2146036796}
   - component: {fileID: 2146036795}
   - component: {fileID: 2146036794}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Flicker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9053,6 +9069,7 @@ SceneRoots:
   - {fileID: 832575519}
   - {fileID: 1269666618}
   - {fileID: 658885059}
+  - {fileID: 919546057}
   - {fileID: 1062333677}
   - {fileID: 2100483894}
   - {fileID: 174272248}
@@ -9066,7 +9083,6 @@ SceneRoots:
   - {fileID: 1085990131}
   - {fileID: 715841604}
   - {fileID: 408824477}
-  - {fileID: 919546057}
   - {fileID: 1552346853}
   - {fileID: 888925644}
   - {fileID: 588454065}

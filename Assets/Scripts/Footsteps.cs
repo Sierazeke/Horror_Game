@@ -17,16 +17,19 @@ public class MovementSoundController : MonoBehaviour
     [Header("Player Reference")]
     public CharacterController characterController;
 
-    private bool isMoving = false;
     private bool wasGrounded = true;
-    private MovementState currentState = MovementState.Idle;
 
-    private enum MovementState
+    // Make enum public
+    public enum MovementState
     {
         Idle,
         Walking,
         Running
     }
+
+    // Expose currentState via public getter
+    private MovementState currentState = MovementState.Idle;
+    public MovementState CurrentState { get { return currentState; } }
 
     void Start()
     {
@@ -47,7 +50,6 @@ public class MovementSoundController : MonoBehaviour
         audioSource.loop = true;
         audioSource.spatialBlend = 1.0f;
 
-        // Initialize wasGrounded with current grounded state
         wasGrounded = characterController != null ? characterController.isGrounded : true;
     }
 
@@ -108,10 +110,7 @@ public class MovementSoundController : MonoBehaviour
             newState = MovementState.Running;
         }
 
-        if (newState != currentState)
-        {
-            currentState = newState;
-        }
+        currentState = newState;
     }
 
     void HandleAudio()
@@ -153,66 +152,30 @@ public class MovementSoundController : MonoBehaviour
         {
             bool isGrounded = characterController.isGrounded;
 
-            // Check for landing (was in air, now grounded)
             if (!wasGrounded && isGrounded)
-            {
                 PlayLandSound();
-            }
 
-            // Check for jumping (was grounded, now in air with upward velocity)
             if (wasGrounded && !isGrounded && characterController.velocity.y > 0.1f)
-            {
                 PlayJumpSound();
-            }
 
             wasGrounded = isGrounded;
         }
         else
         {
-            // Fallback for non-CharacterController setup
             if (Input.GetButtonDown("Jump"))
-            {
                 PlayJumpSound();
-            }
         }
     }
 
     void PlayJumpSound()
     {
         if (jumpSound != null)
-        {
             AudioSource.PlayClipAtPoint(jumpSound, transform.position);
-        }
     }
 
     void PlayLandSound()
     {
         if (landSound != null)
-        {
             AudioSource.PlayClipAtPoint(landSound, transform.position);
-        }
-    }
-
-    public void SetSprinting(bool isSprinting)
-    {
-        if (isSprinting && currentState == MovementState.Walking)
-        {
-            currentState = MovementState.Running;
-        }
-        else if (!isSprinting && currentState == MovementState.Running)
-        {
-            currentState = MovementState.Walking;
-        }
-    }
-
-    // Public methods to manually trigger jump/land sounds if needed
-    public void TriggerJumpSound()
-    {
-        PlayJumpSound();
-    }
-
-    public void TriggerLandSound()
-    {
-        PlayLandSound();
     }
 }
