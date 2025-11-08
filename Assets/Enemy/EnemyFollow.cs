@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemyFollow : MonoBehaviour
 {
@@ -6,16 +6,17 @@ public class EnemyFollow : MonoBehaviour
     public float speed = 3f;
 
     [Header("Map Borders")]
-    public Vector3 minBounds; // bottom-left-back corner
-    public Vector3 maxBounds; // top-right-front corner
+    public Vector3 minBounds;
+    public Vector3 maxBounds;
 
     [Header("Hearing & Sight")]
-    public float visionRange = 3f;        // half-blind
-    public float hearingRange = 8f;       // hears running/jumping
+    public float visionRange = 3f;
+    public float hearingRange = 8f;          // Running / jumping
+    public float walkingHearingRange = 4f;   // NEW: hears walking but only super close
     public MovementSoundController playerSounds;
 
     [Header("Light Fear")]
-    public LayerMask lightMask; // flashlight + house lights
+    public LayerMask lightMask;
     private bool isInLight = false;
 
     private Vector3 roamTarget;
@@ -29,30 +30,36 @@ public class EnemyFollow : MonoBehaviour
     {
         if (player == null) return;
 
-        // Check if in light
+        // Light check
         isInLight = Physics.CheckSphere(transform.position, 0.5f, lightMask);
         if (isInLight)
         {
-            gameObject.SetActive(false); // disappear
+            gameObject.SetActive(false);
             return;
         }
 
         float distToPlayer = Vector3.Distance(transform.position, player.position);
 
-        // Half-blind vision
+        // Vision
         if (distToPlayer <= visionRange)
         {
             MoveToward(player.position);
         }
-        // Hearing: running/jumping
+        // Hearing running/jumping
         else if ((playerSounds.CurrentState == MovementSoundController.MovementState.Running
                   || Input.GetButton("Jump")) && distToPlayer <= hearingRange)
         {
             MoveToward(player.position);
         }
+        // NEW: Hearing walking (only close)
+        else if (playerSounds.CurrentState == MovementSoundController.MovementState.Walking
+                 && distToPlayer <= walkingHearingRange)
+        {
+            MoveToward(player.position);
+        }
         else
         {
-            // Aimless roaming
+            // Roaming
             if (Vector3.Distance(transform.position, roamTarget) < 0.2f)
             {
                 PickNewRoamTarget();
@@ -64,6 +71,20 @@ public class EnemyFollow : MonoBehaviour
     void MoveToward(Vector3 target)
     {
         Vector3 direction = (target - transform.position).normalized;
+
+        if (Physics.Raycast(transform.position, direction, out RaycastHit hit, 0.8f))
+        {
+            if (!hit.collider.CompareTag("Player"))
+            {
+                if (target != player.position)
+                {
+                    PickNewRoamTarget();
+                }
+                return;
+            }
+        }
+
+        // No wall → move normally
         transform.forward = direction;
         transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
     }
@@ -72,21 +93,22 @@ public class EnemyFollow : MonoBehaviour
     {
         roamTarget = new Vector3(
             Random.Range(minBounds.x, maxBounds.x),
-            transform.position.y, // keep same height
+            transform.position.y,
             Random.Range(minBounds.z, maxBounds.z)
         );
     }
 
     void OnDrawGizmosSelected()
     {
-        // Vision/hearing
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, visionRange);
 
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, hearingRange);
 
-        // Map borders
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, walkingHearingRange);
+
         Gizmos.color = Color.green;
         Vector3 center = (minBounds + maxBounds) / 2f;
         Vector3 size = maxBounds - minBounds;

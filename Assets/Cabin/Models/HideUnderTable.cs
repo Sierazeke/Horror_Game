@@ -107,3 +107,4 @@ public class HideUnderTable : MonoBehaviour
             GUI.Label(new Rect(10, 10, 300, 30), "Press E to come out");
     }
 }
+    

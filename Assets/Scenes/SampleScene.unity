@@ -2395,8 +2395,9 @@ MonoBehaviour:
   speed: 7
   minBounds: {x: 139, y: 0, z: 63}
   maxBounds: {x: 63, y: 5, z: 136}
-  visionRange: 3.5
+  visionRange: 4
   hearingRange: 14
+  walkingHearingRange: 6
   playerSounds: {fileID: 713212223}
   lightMask:
     serializedVersion: 2
@@ -6850,7 +6851,7 @@ Light:
   m_Type: 0
   m_Color: {r: 0.5764706, g: 0.47843137, b: 0.28627452, a: 1}
   m_Intensity: 100
-  m_Range: 8.37
+  m_Range: 8
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
